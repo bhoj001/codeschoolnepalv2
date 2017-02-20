@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+<!-- No carousel -->
+{% block carousel %}
+    <br><br><br><br><br>
+    <div class="container">
+        <h4 class="text-capitalize text-center">{% trans 'courses on' %} {{category.category_name}} </h4>
+        <hr>
+    </div>
+
+{% endblock %}
+{% block content %}
+    {% if not courses %}
+        <h3 class="text-capitalize text-center">{% trans "no courses found" %} </h3>
+    {% else %}
+         <div class="row">
+             {% for course in courses %}
+            <!--First columnn-->
+            <div class="col-lg-3">
+                <!--Card-->
+                <div class="card">
+
+                    <!--Card image-->
+                    <div class="view overlay hm-white-slight">
+                        <img width="100%" src="{{course.course_image.url}}" class="img-fluid" alt="">
+                        <a href="{% url 'course:course_detail' course.slug %}">
+                            <div class="mask"></div>
+                        </a>
+                    </div>
+                    <!--/.Card image-->
+
+                    <!--Card content-->
+                    <div class="card-block">
+                        <!--Title-->
+                        <h4 class="card-title text-capitalize">{{ course.course_name}}</h4>
+                        <!--Text-->
+                        <p class="card-text">{{course.course_summary}}</p>
+                        <a href="{% url 'course:course_detail' course.slug %}" class="btn btn-primary">Learn</a>
+                    </div>
+                    <!--/.Card content-->
+
+                </div>
+                <!--/.Card-->
+            </div>
+            {% if forloop.counter == "3" %} <hr> {% endif%}
+
+
+            <!--First columnn-->
+         {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock content %}

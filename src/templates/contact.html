@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <!-- Required meta tags always come first -->
+    {% block meta %}
+        {% include 'partials/_meta.html' %}
+        <!-- add your meta tag here -->
+    {% endblock meta %}
+    <title>{% block title %}Contact Us | CodeschoolNepal {% endblock title %}</title>
+    {% block css %}
+        {% include 'partials/_css.html'%}
+        <style>
+        html,
+        body,
+        header,
+        .view {
+            height: 100%;
+        }
+        /* Navigation*/
+
+        .navbar {
+            background-color: transparent;
+        }
+
+        .top-nav-collapse {
+            background-color: #4285F4;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                background-color: #4285F4;
+            }
+        }
+        /*Intro*/
+
+        .view {
+            background: url("{% static 'img/contact_banner.jpg' %}")no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        @media (max-width: 768px) {
+            .full-bg-img,
+            .view {
+                height: auto;
+                position: relative;
+            }
+        }
+
+        .description {
+            padding-top: 25%;
+            padding-bottom: 3rem;
+            color: #fff
+        }
+
+        @media (max-width: 992px) {
+            .description {
+                padding-top: 7rem;
+                text-align: center;
+            }
+        }
+    </style>
+    {% endblock css %}
+</head>
+<body>
+    <!--Navigation & Intro-->
+    <header>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <!--Navbar-->
+        {% include 'partials/_navbar.html' %}
+        <br><br>
+        <!--/.Navbar-->
+        <!--Mask-->
+        <div class="view hm-black-strong">
+            <div class="full-bg-img flex-center">
+                <div class="container">
+                    <div class="row" id="home">
+                        <!--First column-->
+                        <div class="col-lg-6">
+                            <div class="description">
+                                <h2 class="h2-responsive wow fadeInLeft">We like to receive a messages </h2>
+                                <hr class="hr-light wow fadeInLeft">
+                                <p class="wow fadeInLeft" data-wow-delay="0.4s">Send Us a message</p>
+                                <br>
+                                <a href="/about/" class="btn btn-primary btn-lg wow fadeInLeft" data-wow-delay="0.7s">Learn more</a>
+                            </div>
+                        </div>
+                        <!--/.First column-->
+                        <br><br><br><br>
+
+                        <!--Second column-->
+                        <div class="col-lg-6">
+                            <!--Form-->
+                            <form method="post" action='/contact/' class="card wow fadeInRight">
+
+                                {% csrf_token %}
+                                <div class="card-block">
+                                    <!--Header-->
+                                    <div class="text-center">
+                                        <h3 style="color: #999;"><i class="fa fa-envelope"></i> Write to us:</h3>
+                                        <hr>
+                                    </div>
+
+                                    <!--Body-->
+                                    <div   id="contactform" style="color: black;">
+                                        <style>
+                                            p strong{
+                                                color: darkred;
+                                            }
+                                        </style>
+                                        <form method="POST">
+                                            {{form | crispy }}
+                                             <!--<input   type="submit"  value="Send" name="Send" id="">-->
+                                            <input type="submit" value="Send" class="btn btn-primary">
+                                        </form>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                            <!--/.Form-->
+                        </div>
+                        <!--/Second column-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.Mask-->
+    </header>
+    <!--/Navigation & Intro-->
+    <!-- Footer -->
+    {% include 'partials/_scripts.html'%}
+    <script>
+        new WOW().init();
+        // style the contact form
+
+    </script>
+
+</body>
+
+</html>

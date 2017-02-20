@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %} {{ flatpage.title }} {% endblock title %}
+<!-- DO not show the carousel -->
+{% block carousel %}
+<br><br>
+{% endblock %}
+{% block content %}
+    {{ flatpage.content }}
+{% endblock content %}

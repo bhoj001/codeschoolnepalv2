@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <h4 class="text-center text-capitalize"> Courses you can follow </h4>
+    <hr>
+    {% if not categories %}
+        <h3 class="text-capitalize text-center">{% trans "no courses found" %} </h3>
+    {% else %}
+         <div class="row">
+             {% for category in categories %}
+            <!--First columnn-->
+            <div class="col-lg-4">
+                <!--Card-->
+                <div class="card">
+
+                    <!--Card image-->
+                    <div class="view overlay hm-white-slight">
+                        <img width="100%" src="{{MEDIA_URL}}{{category.category_image}}" class="img-fluid" alt="">
+                        <a href="{% url 'courses:category_detail' category.slug %}">
+                            <div class="mask"></div>
+                        </a>
+                    </div>
+                    <!--/.Card image-->
+
+                    <!--Card content-->
+                    <div class="card-block">
+                        <!--Title-->
+                        <h4 class="card-title text-capitalize">{{ category.category_name}}</h4>
+                        <!--Text-->
+                        <p class="card-text">{{category.summary}}</p>
+                        <a href="{% url 'courses:category_detail' category.slug %}" class="btn btn-primary">Browse</a>
+                    </div>
+                    <!--/.Card content-->
+
+                </div>
+                <!--/.Card-->
+            </div>
+            <!--First columnn-->
+         {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock content %}

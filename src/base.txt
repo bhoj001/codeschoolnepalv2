@@ -1,0 +1,5 @@
+Django==1.10.5
+gunicorn==19.6.0
+Pillow==4.0.0
+django-crispy-forms
+

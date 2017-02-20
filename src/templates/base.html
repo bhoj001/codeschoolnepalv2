@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <!-- meta block -->
+    {% block meta %} {% include 'partials/_meta.html' %} {% endblock meta %}
+    <!-- title block -->
+    <title>{% block title %}{% endblock title %} | CodeSchoolNepal</title>
+    <!-- css block -->
+    {% block css %} {% include 'partials/_css.html' %} {% endblock css %}
+</head>
+
+<body>
+    {% block navbar %}
+        <!--Navbar-->
+        {% include 'partials/_navbar.html' %}
+        <!--/.Navbar-->
+    {% endblock navbar %}
+
+    {% block carousel %}
+        <!--Carousel Wrapper-->
+        {% include 'partials/_carousel.html' %}
+        <!--/.Carousel Wrapper-->
+    {% endblock carousel %}
+    <br>
+
+    <!--Content-->
+    <div class="container">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+    <!--/.Content-->
+
+    <!--Footer-->
+    {% block footer %}
+        {% include 'partials/_footer.html' %}
+        <!--/.Footer-->
+    {% endblock footer %}
+    <!-- SCRIPTS -->
+    {% block scripts %} {% include 'partials/_scripts.html' %} {% endblock scripts %}
+     <!-- Scripts -->
+</body>
+</html>
