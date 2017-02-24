@@ -26,3 +26,6 @@ media/*
 #assets
 
 assets/*
+
+# environment variables
+.env

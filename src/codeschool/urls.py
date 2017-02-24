@@ -18,33 +18,47 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.flatpages import views
-import courses.views
 from django.contrib import flatpages
+from rest_framework import routers
+import courses.views
 
 
-
-urlpatterns = [
-    # codeschool nepal homepage
+project_urls = [
     # Admin urls
     url(r'^admin/', admin.site.urls),
     # Course related urls
     url(r'^$', courses.views.index, name="index"),
-    # /courses/
-    url(r'^courses/', include('courses.urls',namespace="courses"),),
+    # Course app urls
+    url(r'^courses/', include('courses.urls',namespace="courses")),
+    # Blog app urls
+    url(r'blog/', include('blog.urls', namespace="blog")),
     # course only url
     # /course/
     url(r'course/', include('courses.course_urls', namespace="course")),
     # contact page
     url(r'^contact/$', courses.views.contact, name="contact"),
     # About page is served from the flat pages
-    url(r'about/$', flatpages.views.flatpage, {'url':'/about/'}, name="about")
+    url(r'about/$', flatpages.views.flatpage, {'url':'/about/'}, name="about"),
     # url(r'about/$', name="about")
+
+]
+
+# Per app based api urls
+api_urls = [
+    # Api authentication
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # Api v1.0 urls for course app
+    url(r'^api/', include('courses.api.urls', namespace="courses_api")),
 ]
 
 # Append this flatpages_urls at the  last
 flatpages_urls = [
     url(r'^about/$', views.flatpage, {'url': '/about/'}, name='about'),
 ]
+
+
+# Overall url patterns of a project
+urlpatterns =  api_urls + project_urls
 
 if not settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

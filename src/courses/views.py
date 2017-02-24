@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse, get_object_or_404
 from .forms import  ContactUsForm
 from .models import Category, Course
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
 
 def index(request):
     data = dict()
@@ -22,7 +24,7 @@ def category_detail(request, slug):
     "Display the detail of a category"
     data = dict()
     category = get_object_or_404(Category, slug=slug)
-    courses = category.course_set.all()
+    courses = category.courses.all()
     data['category'] = category
     data['courses'] = courses
     return render(request, 'courses/category/category_detail.html', data)
@@ -32,9 +34,11 @@ def course_detail(request, slug):
     data = dict()
     course = get_object_or_404(Course, slug=slug)
     data['course'] = course
-    lessons = course.lesson_set.all()
+    lessons = course.lessons.all()
     data['lessons'] = lessons
+    print(lessons)
     return render(request, 'courses/course/course_detail.html', data)
+
 
 
 def contact(request):
@@ -45,8 +49,9 @@ def contact(request):
             message = form.cleaned_data['message']
             email = form.cleaned_data['email']
             # suscribe = form.cleaned_data('suscribe')
-            print(name, message, email)
-            return HttpResponse("Submitted clear")
+            send_mail(name, message, 'surfer.manoj@gmail.com', ['manojit.gautam@gmail.com'],fail_silently=True)
+            contact_message = True
+            return render(request, 'contact.html', {'form': ContactUsForm(), message:contact_message})
         else:
             # return the form with binding values
             return render(request, 'contact.html', {'form': form})
@@ -54,6 +59,5 @@ def contact(request):
         # Blank empty form
         form = ContactUsForm()
         return render(request, 'contact.html', {'form': form})
-
 
 

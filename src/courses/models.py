@@ -18,7 +18,7 @@ class Category(models.Model):
 class Course(models.Model):
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, related_name="courses", on_delete=models.CASCADE)
     course_name = models.CharField('Course Name', max_length=255)
     course_summary = models.CharField(max_length=255)
     course_image = models.ImageField("Course Image 350X230", upload_to='course')
@@ -30,12 +30,13 @@ class Course(models.Model):
 
 class Lesson(models.Model):
     """Course Lesson"""
-    course = models.ForeignKey(Course)
-    course_title = models.CharField(max_length=255)
-    course_content = models.TextField()
+    course = models.ForeignKey(Course, related_name="lessons", on_delete=models.CASCADE)
+    lesson_title = models.CharField(max_length=255)
+    lesson_content = models.TextField()
+    lesson_video = models.URLField("Youtube Video Link")
 
     def __str__(self):
-        return  self.course_title
+        return  self.lesson_title
 
 
 

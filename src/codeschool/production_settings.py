@@ -1,8 +1,12 @@
-from settings import *
+from .settings import *
 DEBUG = False
 
 # Allowed host configuration
-ALLOWED_HOSTS = ['codeschoolnepal.org', 'www.codeschoolnepal.org']
+ALLOWED_HOSTS = [
+    '127.0.0.1'
+    'codeschoolnepal.org',
+    'www.codeschoolnepal.org'
+]
 
 # Database settings
 DATABASES = {

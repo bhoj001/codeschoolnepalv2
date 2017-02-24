@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load i18n %}
+<head>
+
+    {% include 'blog/partials/_css.html' %}
+
+</head>
+
+<body>
+
+    {% include 'blog/partials/_navbar.html' %}
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('{% static "blog/img/home-bg.jpg" %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Code School Nepal Blog</h1>
+                        <hr class="small">
+                        <span class="subheading">{% block post-title %}Latest posts{% endblock post-title %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% if not posts %}
+                    <h1>No posts found</h1>
+                {% else %}
+                {% for post in posts %}
+                <div class="post-preview">
+                    <a href="{% url 'blog:post-detail' post.slug%}">
+                        <h2 class="post-title">
+                           {{post.title}}
+                        </h2>
+                        <h3 class="post-subtitle">
+
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="">{% trans 'code school nepal' %}</a>{{ post.updated_date | date}}</p>
+                </div>
+                <hr>
+                {% endfor %}
+                {% endif %}
+
+                <!-- TODO: Pagination -->
+                <!--<ul class="pager">-->
+                    <!--<li class="next">-->
+                        <!--<a href="#">Older Posts &rarr;</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+    <!-- Footer -->
+        {% include 'blog/partials/_footer.html' %}
+    <!-- Footer -->
+
+</body>
+
+</html>

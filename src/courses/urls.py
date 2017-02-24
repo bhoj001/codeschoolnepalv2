@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from . import views
+from rest_framework import routers
+
 
 
 urlpatterns = [
@@ -11,5 +13,6 @@ urlpatterns = [
     # /courses/robotics/
     url(r'(?P<slug>[\w-]+)/$', views.category_detail, name="category_detail"),
 ]
+
 
 

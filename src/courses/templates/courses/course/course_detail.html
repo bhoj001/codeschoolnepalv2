@@ -37,10 +37,14 @@
                     <div class="card grey lighten-5 text-center z-depth-2">
                         <div class="card-block">
                             <!-- Lesson names goes here with ajax -->
-                            <h4>{{ course.course_name}}</h4>
+                            <h4 id="lesson-title">{{course.course_name}}</h4>
                             <hr>
                             <!-- Video goes here -->
-                            <p><iframe width="90%" height="300" src="https://www.youtube.com/embed/xkrrY850YUg" frameborder="0" allowfullscreen></iframe>
+                            <p>
+                                <iframe id="lesson-video" width="100%" height="300"
+                                        src="https://www.youtube.com/embed/"
+                                        frameborder="0" allowfullscreen>
+                                </iframe>
                             </p>
                             <button class="btn btn-primary">{% trans 'next' %}</button>
                         </div>
@@ -50,10 +54,10 @@
                 <!--Lesson description-->
                     <div class="card grey lighten-5 text-center z-depth-2">
                         <div class="card-block">
-                            <h4 class="text-capitalize">{% trans 'description' %}</h4>
+                            <h4 class="text-capitalize">{% trans 'course content' %}</h4>
                             <hr>
-                            <p>
-                                {{course.course_content}}
+                            <p id="lesson-content">
+                                {{course.lesson_content}}
                             </p>
                         </div>
                     </div>
@@ -62,7 +66,7 @@
             </div>
 
             <div class="col-md-4">
-                 {% if not course.lesson_set %}
+                 {% if not course.lessons %}
                     <h3>No Lessons found</h3>
                 {% else %}
 
@@ -80,7 +84,7 @@
                                        data-course-id="{{lesson.course.id}}"
                                        data-url="{% url 'course:course_detail' course.slug %}"
                                        data-lesson-id="{{lesson.id}}">
-                                        {{forloop.counter}}. &nbsp; {{lesson.course_title}}
+                                        {{forloop.counter}}. &nbsp; {{lesson.lesson_title}}
                                     </a>
                                 </li>
                             {% endfor %}
@@ -95,17 +99,37 @@
 <script type="text/javascript">
      // function to handle click buttons
      function  loadpage(obj) {
+         // set this item to active
+          $(obj).parent().siblings('li').removeClass('active');
+
+            console.log($(obj).parent().addClass('active'));
          // get the course ID and Lesson ID
          var courseID = obj.getAttribute('data-course-id');
          var lessonID = obj.getAttribute('data-lesson-id');
-         var url = obj.getAttribute('data-url')
+         // url will be constructed using api
+         var url = '/api/lesson/' + lessonID +'/?format=json'
          // Request for Ajax get
          $.get({
              url: url,
-             success: function () {
+             success: function (data) {
+                 // parsing the data
+                 var title = data.lesson_title;
+                 //grab only video id
+                 var video = data.lesson_video.split('https://www.youtube.com/watch?v=')[1];
+                 // parse the lesson video to get the id
+                 console.log("Lesson video"+ video);
+                 var content = data.lesson_content;
+                // parsing the place holders and set the content
+                 $('#lesson-title').text(title); //set the title
+                 $('#lesson-content').text(content); // set the content
+                 $('#lesson-video').attr('src', 'https://www.youtube.com/embed/'+video); // set the video
+
+
+
              },
-             error: function () {
-                 $('#errorModal').modal('toggle');
+             error: function (data) {
+//                 $('#errorModal').modal('toggle');
+                 alert("error")
              }
          })
 

@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+     # Django rest framework
+    'rest_framework',
      # Third party applications
     'crispy_forms',
-    'courses'
+    'courses',
+    'blog',
+
 ]
 
 MIDDLEWARE = [
@@ -109,6 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -126,7 +131,10 @@ USE_TZ = True
 SITE_ID = 1
 
 # Third party settings configuration
+from config.rest_framework import *
 from config.crispy import *
+from config.email_settings import *
+
 
 
 # Static files (CSS, JavaScript, Images)

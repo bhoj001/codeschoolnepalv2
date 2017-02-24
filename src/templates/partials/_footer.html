@@ -1,86 +1,59 @@
 {% load static %}
-<footer class="page-footer center-on-small-only">
+{% load i18n %}
 
-        <!--Footer Links-->
+<!--Footer-->
+<footer class="page-footer elegant-color center-on-small-only">
+
+    <!--Footer Links-->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!--First column-->
+            <div class="col-md-6">
+                <h5 class="title">{% trans 'code school nepal' %}</h5>
+                <p>
+                    Code School nepal host the tutorials on web technologies, networking, and system administration  with video lessons,
+                     We strive to help you learn by doing.
+                </p>
+            </div>
+            <!--/.First column-->
+
+            <!--Second column-->
+            <div class="col-md-3">
+                <h5 class="title ">{% trans 'code school nepal' %}</h5>
+                <ul>
+                    <li><a href="/about/" class="text-capitalize">{% trans 'about' %}</a></li>
+                    <li><a href="/contact" class="text-capitalize">{% trans 'contact' %}</a></li>
+                    <li><a href="/terms" class="text-capitalize">{% trans 'terms and condition' %}</a></li>
+
+                </ul>
+            </div>
+            <!--/.Second column-->
+
+             <!--Second column-->
+            <div class="col-md-3">
+                <h5 class="title ">{% trans 'keep in touch' %}</h5>
+                <ul>
+                    <li>Contact: manojit.gautam@gmail.com</li>
+                    <li><a href="/donate" class="text-capitalize">{% trans 'support this website' %}</a></li>
+                    <li><a href="/terms" class="text-capitalize"> <i class="fa fa-facebook"></i> &nbsp;{% trans 'facebook' %}</a></li>
+                     <li><a href="/terms" class="text-capitalize"><i class="fa fa-twitter"></i> &nbsp;{% trans 'twitter' %}</a></li>
+
+                </ul>
+            </div>
+            <!--/.Second column-->
+        </div>
+    </div>
+    <!--/.Footer Links-->
+
+    <!--Copyright-->
+    <div class="footer-copyright">
         <div class="container-fluid">
-            <div class="row">
+            ©  Copyright: <a href="/"> codeschoolnepal.com </a>
 
-                <!--First column-->
-                <div class="col-lg-3 offset-lg-1 hidden-lg-down">
-                    <h5 class="title">About Code school Nepal</h5>
-                    <p>De</p>
-
-                    <p>Material Design for Bootstrap (MDB) is a powerful Material Design UI KIT for most popular HTML, CSS, and JS framework - Bootstrap.</p>
-                </div>
-                <!--/.First column-->
-
-                <hr class="hidden-md-up">
-
-                <!--Second column-->
-                <div class="col-lg-2 col-md-4 offset-lg-1">
-                    <h5 class="title">First column</h5>
-                    <ul>
-                        <li><a href="#!">Link 1</a></li>
-                        <li><a href="#!">Link 2</a></li>
-                        <li><a href="#!">Link 3</a></li>
-                        <li><a href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-                <!--/.Second column-->
-
-                <hr class="hidden-md-up">
-
-                <!--Third column-->
-                <div class="col-lg-2 col-md-4">
-                    <h5 class="title">Second column</h5>
-                    <ul>
-                        <li><a href="#!">Link 1</a></li>
-                        <li><a href="#!">Link 2</a></li>
-                        <li><a href="#!">Link 3</a></li>
-                        <li><a href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-                <!--/.Third column-->
-
-                <hr class="hidden-md-up">
-
-                <!--Fourth column-->
-                <div class="col-lg-2 col-md-4">
-                    <h5 class="title">Third column</h5>
-                    <ul>
-                        <li><a href="#!">Link 1</a></li>
-                        <li><a href="#!">Link 2</a></li>
-                        <li><a href="#!">Link 3</a></li>
-                        <li><a href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-                <!--/.Fourth column-->
-
-            </div>
         </div>
-        <!--/.Footer Links-->
+    </div>
+    <!--/.Copyright-->
 
-        <hr>
-
-        <!--Call to action-->
-        <div class="call-to-action">
-            <h4>Material Design for Bootstrap</h4>
-            <ul>
-                <li>
-                    <h5>Get our UI KIT for free</h5></li>
-                <li><a target="_blank" href="http://mdbootstrap.com/getting-started/" class="btn btn-danger">Sign up!</a></li>
-                <li><a target="_blank" href="http://mdbootstrap.com/material-design-for-bootstrap/" class="btn btn-default">Learn more</a></li>
-            </ul>
-        </div>
-        <!--/.Call to action-->
-
-        <!--Copyright-->
-        <div class="footer-copyright">
-            <div class="container-fluid">
-                © 2015 Copyright: <a href="http://www.MDBootstrap.com"> MDBootstrap.com </a>
-
-            </div>
-        </div>
-        <!--/.Copyright-->
-
-    </footer>
+</footer>
+<!--/.Footer-->
