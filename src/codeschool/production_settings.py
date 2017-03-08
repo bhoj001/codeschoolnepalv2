@@ -1,6 +1,6 @@
 from .settings import *
 DEBUG = False
-
+import os
 # Allowed host configuration
 ALLOWED_HOSTS = [
     '127.0.0.1'
@@ -8,14 +8,20 @@ ALLOWED_HOSTS = [
     'www.codeschoolnepal.org'
 ]
 
+CODESCHOOLNEPAL_DB_NAME = os.getenv('CODESCHOOLNEPAL_DB_NAME')
+CODESCHOOLNEPAL_DB_HOST = os.getenv('CODESCHOOLNEPAL_DB_HOST')
+CODESCHOOLNEPAL_DB_PORT = os.getenv('CODESCHOOLNEPAL_DB_PORT')
+CODESCHOOLNEPAL_DB_USERNAME = os.getenv('CODESCHOOLNEPAL_DB_USERNAME')
+CODESCHOOLNEPAL_DB_PASSWORD = os.getenv('CODESCHOOLNEPAL_DB_PASSWORD')
+
 # Database settings
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'codeschoolnepal',
-        'HOST': '127.0.0.1',
-		'PORT': 5432,
-        'USERNAME': 'codeschoolnepal_user',
-        'PASSWORD': 'codeschoolnepal@#321',
+        'NAME': CODESCHOOLNEPAL_DB_NAME,
+        'HOST': CODESCHOOLNEPAL_DB_HOST,
+		'PORT': CODESCHOOLNEPAL_DB_PORT,
+        'USERNAME': CODESCHOOLNEPAL_DB_USERNAME,
+        'PASSWORD': CODESCHOOLNEPAL_DB_PASSWORD,
     }
 }
