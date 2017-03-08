@@ -141,11 +141,21 @@ from config.email_settings import *
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/assets/'
 STATICFILES_DIRS = (
     ('static'),
 )
+# Don't put static root in version control
+STATIC_ROOT = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))),
+    'assets'
+)
+
 
 # Media Configuration
+# dont' put media in version control.
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))),
+    'media'
+
+)

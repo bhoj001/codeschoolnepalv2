@@ -29,3 +29,4 @@ assets/*
 
 # environment variables
 .env
+env

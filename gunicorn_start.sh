@@ -3,11 +3,11 @@
 # Name of an application
 NAME="CodeSchoolNepal"
 # project directory
-PROJECTDIR=/webapps/codeschoolnepal.org
+PROJECTDIR=/webapps/codeschoolnepal.com
 # django project virutalenv directory
-VENVDIR=/webapps/codeschoolnepal.org/venv
+VENVDIR=/webapps/codeschoolnepal.com/venv
 # Project source directory
-SRCDIR=/webapps/codeschoolnepal.org/master/src
+SRCDIR=/webapps/codeschoolnepal.com/master/src
 # Sock file as gunicorn will communicate using unix socket
 SOCKFILE=$PROJECTDIR/gunicorn.sock
 # Name of the application
@@ -21,7 +21,7 @@ NUM_WORKERS=3
 # which settings file should Django use
 DJANGO_SETTINGS_MODULE=codeschool.production_settings
 # WSGI module name
-DJANGO_WSGI_MODULE=codecschool.wsgi
+DJANGO_WSGI_MODULE=codeschool.wsgi
 
 # Activate the virtual environment
 source $VENVDIR/bin/activate
