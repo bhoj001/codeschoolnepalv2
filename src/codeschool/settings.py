@@ -26,8 +26,8 @@ SECRET_KEY = 'utzagl-srx4$%m+-=g4@urgy#k4xbp6bm$=qad(+(o4-s2paxa'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
     'codeschoolnepal.com',
+    '127.0.0.1',
     'www.codeschoolnepal.com',
 ]
 

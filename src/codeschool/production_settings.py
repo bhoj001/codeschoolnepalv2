@@ -3,8 +3,8 @@ DEBUG = False
 import os
 # Allowed host configuration
 ALLOWED_HOSTS = [
-    '127.0.0.1',
     'codeschoolnepal.com',
+    '127.0.0.1',
     'www.codeschoolnepal.com',
 ]
 
