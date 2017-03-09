@@ -3,9 +3,9 @@ DEBUG = False
 import os
 # Allowed host configuration
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
     'codeschoolnepal.com',
-    'www.codeschoolnepal.org'
+    'www.codeschoolnepal.com',
 ]
 
 CODESCHOOLNEPAL_DB_NAME = os.getenv('CODESCHOOLNEPAL_DB_NAME')
