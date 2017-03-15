@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'codeschoolnepal.com',
     '127.0.0.1',
+    'localhost',
     'www.codeschoolnepal.com',
 ]
 

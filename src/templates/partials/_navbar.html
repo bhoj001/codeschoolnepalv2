@@ -1,5 +1,36 @@
 {% load static %}
 {% load i18n %}
+<!-- modals are place on the top of the page -->
+<!--search modal -->
+<!-- Modal -->
+    <div class="modal  fade" id="navbar-search-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!--Content-->
+            <div class="modal-content">
+
+                <!--Body-->
+                <div class="modal-body">
+                 <div class="md-form">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span  class="text-left" aria-hidden="true">&times;</span>
+                    </button>
+
+                     <input type="text"  class="form-control"
+                            value=""
+                            id="modalSearchForm"
+                            name="search-text"
+                            placeholder="Search Courses">
+                            <div id="animation" class="text-center"></div>
+                     <!-- loading animation -->
+                     <div id="navbar-search-result">
+                     </div>
+                 </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
  <nav class="navbar navbar-toggleable-md navbar-dark fixed-top scrolling-navbar top-nav-collapse">
         <div class="container">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,8 +61,64 @@
                     </li>
                 </ul>
                 <form class="form-inline waves-effect waves-light">
-                    <input class="form-control" type="text" placeholder="Search">
+                    <input class="form-control"
+                           id="navbarSearchForm"
+                           type="text" placeholder="Search Courses">
                 </form>
             </div>
         </div>
     </nav>
+
+<!-- search modal -->
+<script>
+    $(document).ready(function(){
+        $("#navbarSearchForm").click(function(){
+            // Display search modal box.
+            $('#navbar-search-modal').modal('show');
+            // Initially set the search result to empty value.
+            $("#navbar-search-result").html("");
+            // On click keyup modalSearchForm do ajax search
+            $("#modalSearchForm").keyup(function(){
+                // Check for empty input and value less than 3 character.
+                console.log("Keyup is pressed with value"+ $("#modalSearchForm").val().length);
+                if($("#modalSearchForm").val().length <=2 || $("#modalSearchForm").val() == ""){
+                    // set the result to empty.
+                     $("#navbar-search-result").html("");
+                     return;
+                }
+                // If the value length > 3 and not empty
+                if($("#modalSearchForm").val().length >2 && $("#modalSearchForm").val()){
+                    // do the ajax search
+                    var searchText = $("#modalSearchForm").val();
+                    $.ajax({
+                        url: 'http://localhost:8000/courses/ajax/',
+                        method: "POST",
+                        beforeSend: function() { $('#animation').addClass('loader'); },
+                        complete: function() { $('#animation').removeClass('loader'); },
+                        data:{
+                            'search_text': searchText,
+                            'csrfmiddlewaretoken': '{{csrf_token}}',
+                        },
+                        success: function(data){
+                            // If the data length is empty, set the value to no data found
+                            if(data.length <= 0 ){
+                                 $("#navbar-search-result").html("No Courses found");
+                                 return;
+                            }
+                            var links = ""
+                            $.each(data, function(index, course){
+                               // update the result
+                                links += "<a href=/course/" + course.fields.slug + ">" + course.fields.slug+ "</a><br>";
+                                 $("#navbar-search-result").html(links);
+                            });
+                        },
+                        error: function(){
+                             $("#navbar-search-result").html("Oops ! Can't found courses");
+                        }
+                    });
+                }
+            });
+        })
+    });
+</script>
+

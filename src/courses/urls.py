@@ -8,10 +8,12 @@ urlpatterns = [
     # Display all the course related to the course categories
     # /courses/
     url(r'^$', views.categories, name="categories"),
+    # url for course ajax
+    url(r'^ajax/$', views.course_ajax_search, name="course_ajax_search"),
     # /courses/course_category/
     # Category detail page
-    # /courses/robotics/
-    url(r'(?P<slug>[\w-]+)/$', views.category_detail, name="category_detail"),
+    url(r'^(?P<slug>[\w-]+)/$', views.category_detail, name="category_detail"),
+
 ]
 
 

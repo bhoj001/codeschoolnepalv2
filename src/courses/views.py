@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse, get_object_or_404
-from .forms import  ContactUsForm
+from .forms import ContactUsForm
 from .models import Category, Course
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
+import json
+from django.core import serializers
+
 
 def index(request):
     data = dict()
@@ -20,6 +23,7 @@ def categories(request):
     data['categories'] = categories
     return render(request, 'courses/category/categories.html', data)
 
+
 def category_detail(request, slug):
     "Display the detail of a category"
     data = dict()
@@ -28,6 +32,7 @@ def category_detail(request, slug):
     data['category'] = category
     data['courses'] = courses
     return render(request, 'courses/category/category_detail.html', data)
+
 
 def course_detail(request, slug):
     """Serve the detail description of course"""
@@ -40,7 +45,6 @@ def course_detail(request, slug):
     return render(request, 'courses/course/course_detail.html', data)
 
 
-
 def contact(request):
     if request.method == "POST":
         form = ContactUsForm(request.POST)
@@ -49,9 +53,9 @@ def contact(request):
             message = form.cleaned_data['message']
             email = form.cleaned_data['email']
             # suscribe = form.cleaned_data('suscribe')
-            send_mail(name, message, 'surfer.manoj@gmail.com', ['manojit.gautam@gmail.com'],fail_silently=True)
+            send_mail(name, message, 'surfer.manoj@gmail.com', ['manojit.gautam@gmail.com'], fail_silently=True)
             contact_message = True
-            return render(request, 'contact.html', {'form': ContactUsForm(), message:contact_message})
+            return render(request, 'contact.html', {'form': ContactUsForm(), message: contact_message})
         else:
             # return the form with binding values
             return render(request, 'contact.html', {'form': form})
@@ -61,3 +65,20 @@ def contact(request):
         return render(request, 'contact.html', {'form': form})
 
 
+def course_ajax_search(request):
+    if request.method == "POST":
+        search_text = request.POST.get('search_text')
+        # Full text search
+        if len(search_text) < 2:
+            return HttpResponse(" ")
+
+        courses = Course.objects.filter(
+            course_name__contains=search_text
+        )
+        print(courses)
+        courses = serializers.serialize(
+            'json', courses, fields=('slug', 'course_name',)
+        )
+        return HttpResponse(courses, content_type="application/json")
+    else:
+        return HttpResponseRedirect("/courses")

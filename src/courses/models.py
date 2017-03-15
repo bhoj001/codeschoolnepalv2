@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Category(models.Model):
     """Different category of courses"""
 
@@ -12,7 +13,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        return  self.category_name
+        return self.category_name
 
 
 class Course(models.Model):
@@ -27,6 +28,9 @@ class Course(models.Model):
     def __str__(self):
         return self.course_name
 
+    def get_absolute_url(self):
+        return 'hello'
+
 
 class Lesson(models.Model):
     """Course Lesson"""
@@ -36,8 +40,4 @@ class Lesson(models.Model):
     lesson_video = models.URLField("Youtube Video Link")
 
     def __str__(self):
-        return  self.lesson_title
-
-
-
-
+        return self.lesson_title
